@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    
+    var paddle = SKSpriteNode()
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var ball = SKShapeNode()
@@ -22,6 +22,7 @@ class GameScene: SKScene {
     func resetGame(){
         //this stuff happens before each game starts
         makeBall()
+        makePaddle()
         
     }
     
@@ -63,13 +64,17 @@ class GameScene: SKScene {
         //does not slow over time
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
-        addChild(ball) //add ball object to the view 
-        
-        
-        
-        
-        
-        
+        addChild(ball) //add ball object to the view
+    }
+    
+    func makePaddle(){
+        paddle.removeFromParent() //remove the paddle, if it exists
+        paddle = SKSpriteNode(color: .white, size: CGSize(width: frame.width/4, height: 20))
+        paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125 )
+        paddle.name = ("paddle")
+        paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
+        paddle.physicsBody?.isDynamic = false
+        addChild(paddle)
     }
     
     }
