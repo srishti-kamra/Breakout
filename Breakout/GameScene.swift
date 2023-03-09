@@ -8,18 +8,23 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var loseZone = SKSpriteNode()
     var brick = SKSpriteNode()
     var paddle = SKSpriteNode()
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    /*
+     private var label : SKLabelNode?
+     private var spinnyNode : SKShapeNode?
+     */
     var ball = SKShapeNode()
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
      //this stuff happens once (when the app opens)
         createBackground()
         resetGame()
         makeLoseZone()
+        kickBall()
         
         }
     func resetGame(){
@@ -28,6 +33,11 @@ class GameScene: SKScene {
         makePaddle()
         makeBrick()
         
+    }
+    
+    func kickBall(){
+        ball.physicsBody?.isDynamic = true
+        ball.physicsBody?.applyForce(CGVector(dx: 3, dy: 5))
     }
     
     func createBackground(){
