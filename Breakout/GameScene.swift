@@ -162,7 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //decrease paddle size
                 paddle.scale(to: CGSize(width: (frame.width / 2) - CGFloat(score), height: 20))
                  if brick.color == .blue {
-                    brick.color = .orange   // blue bricks turn orange
+                    brick.color = .purple
                 }
                 else if brick.color == .orange {
                     brick.color = .green    // orange bricks turn green
